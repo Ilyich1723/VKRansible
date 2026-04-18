@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fallout Archive — Главная</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/app.js"></script>
+</head>
+<body data-page="home">
+  <div class="scroll-progress"><span></span></div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html">Fallout Archive</a>
+      <button class="menu-toggle" type="button" aria-label="Открыть меню">☰</button>
+      <nav class="main-nav">
+        <a href="index.html">Главная</a>
+        <a href="lore.html">Лор</a>
+        <a href="timeline.html">Хронология</a>
+        <a href="games.html">Игры</a>
+        <a href="story.html">Сюжет</a>
+        <a href="factions.html">Фракции</a>
+        <a href="vaults.html">Убежища</a>
+        <a href="gallery.html">Галерея</a>
+      </nav>
+      <button class="theme-toggle" type="button">Светлая тема</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Портал по миру Fallout</p>
+          <h1>Полностью переработанный сайт с лором, анимациями и подробным сюжетом игр</h1>
+          <p class="lead">
+            Этот вариант уже не похож на учебную заготовку: здесь больше страниц, больше контента,
+            отдельный раздел с сюжетом по играм, галерея, фильтры, поиск, анимированные карточки,
+            слайдер, светлая и тёмная тема, раскрытие блоков при скролле и удобная навигация между разделами.
+          </p>
+          <div class="hero-actions">
+            <a class="pill" href="story.html">Читать весь сюжет</a>
+            <a class="pill" href="lore.html">Изучить лор мира</a>
+            <a class="pill" href="gallery.html">Открыть галерею</a>
+          </div>
+          <div class="badges" style="margin-top:18px;">
+            <span class="pill small">8 страниц</span>
+            <span class="pill small">Много иллюстраций</span>
+            <span class="pill small">Динамический интерфейс</span>
+          </div>
+        </div>
+
+        <div class="panel terminal glow reveal">
+          <div class="hero-orbit"></div>
+          <div class="terminal-line">&gt; загрузка архива Пустоши...</div>
+          <div class="terminal-line">&gt; синхронизация хронологии...</div>
+          <div class="terminal-line">&gt; чтение данных об убежищах и фракциях...</div>
+          <div class="terminal-line terminal-accent" id="quote-box">War. War never changes.</div>
+          <div class="image-frame" style="margin-top:8px;">
+            <img src="assets/images/hero-wasteland.svg" alt="Стилизованная пустошь Fallout" class="clickable-image" data-lightbox="assets/images/hero-wasteland.svg" data-caption="Пустошь, руины и атмосфера ретрофутуристического постапокалипсиса." />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="kpi-grid">
+          <article class="card reveal spotlight">
+            <span class="kpi-value" data-counter="8">0</span>
+            <span class="kpi-label">страниц в новой структуре</span>
+          </article>
+          <article class="card reveal spotlight">
+            <span class="kpi-value" data-counter="9">0</span>
+            <span class="kpi-label">игр и спин-оффов в обзоре</span>
+          </article>
+          <article class="card reveal spotlight">
+            <span class="kpi-value" data-counter="12">0</span>
+            <span class="kpi-label">локальных иллюстраций</span>
+          </article>
+          <article class="card reveal spotlight">
+            <span class="kpi-value" data-counter="4">0</span>
+            <span class="kpi-label">типа интерактива на клиенте</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Что появилось</p>
+            <h2>Новая структура сайта</h2>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <article class="card reveal spotlight">
+            <h3>Лор мира</h3>
+            <p class="lead">От расхождения истории с нашей реальностью до Великой войны, Vault-Tec, ресурсов, фракций и устройства общества после ядерного обмена.</p>
+            <a class="story-anchor" href="lore.html">Перейти к разделу лора</a>
+          </article>
+          <article class="card reveal spotlight">
+            <h3>Подробный сюжет игр</h3>
+            <p class="lead">Для Fallout, Fallout 2, Tactics, Fallout 3, New Vegas, Fallout 4 и Fallout 76 есть развёрнутые сюжетные блоки с центральными конфликтами и финальными ставками.</p>
+            <a class="story-anchor" href="story.html">Читать сюжет игр</a>
+          </article>
+          <article class="card reveal spotlight">
+            <h3>Галерея и анимации</h3>
+            <p class="lead">Слайдер, просмотр изображений в лайтбоксе, фильтры, счётчики, анимация появления блоков и навигация между страницами без ощущения «сухого» макета.</p>
+            <a class="story-anchor" href="gallery.html">Открыть галерею</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container slider reveal" data-slider>
+        <div class="slider-head">
+          <div>
+            <p class="eyebrow">Подборка</p>
+            <h2>Ключевые темы вселенной</h2>
+          </div>
+          <div class="stack-sm">
+            <button class="slider-btn slider-prev" type="button">←</button>
+            <button class="slider-btn slider-next" type="button">→</button>
+          </div>
+        </div>
+        <div class="slider-window">
+          <div class="slider-track">
+            <div class="slide">
+              <div class="split-grid">
+                <div class="card spotlight">
+                  <h3>Память о старом мире</h3>
+                  <p class="lead">Fallout постоянно сталкивает довоенные идеалы с послевоенной реальностью: рекламный оптимизм, мания контроля, милитаризм и вера в технологическое спасение переживают саму цивилизацию.</p>
+                </div>
+                <div class="image-frame">
+                  <img src="assets/images/mushroom-cloud.svg" alt="Великая война" class="clickable-image" data-lightbox="assets/images/mushroom-cloud.svg" data-caption="Ядерный обмен 23 октября 2077 года — центральная точка истории вселенной." />
+                </div>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="split-grid">
+                <div class="card spotlight">
+                  <h3>Человек против системы</h3>
+                  <p class="lead">Герой в Fallout почти всегда вынужден решать не только локальную проблему, но и вопрос, какая система вообще имеет право строить будущее: республика, орден, диктатура, технократия или свободные общины.</p>
+                </div>
+                <div class="image-frame">
+                  <img src="assets/images/brotherhood.svg" alt="Братство Стали" class="clickable-image" data-lightbox="assets/images/brotherhood.svg" data-caption="Братство Стали — пример силы, которая одновременно защищает технологии и ограничивает к ним доступ." />
+                </div>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="split-grid">
+                <div class="card spotlight">
+                  <h3>Убежища как социальные эксперименты</h3>
+                  <p class="lead">Vault-Tec обещала спасение, но многие убежища создавались как лаборатории над людьми. Поэтому почти каждое убежище в серии — это не только безопасная дверь, но и отдельная трагедия.</p>
+                </div>
+                <div class="image-frame">
+                  <img src="assets/images/vault-door.svg" alt="Дверь убежища" class="clickable-image" data-lightbox="assets/images/vault-door.svg" data-caption="Убежища в серии часто оказываются частью масштабных экспериментов Vault-Tec." />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container overview-grid">
+        <div class="card reveal spotlight">
+          <p class="eyebrow">Маршрут</p>
+          <h2>С чего лучше начать просмотр</h2>
+          <div class="table-like">
+            <div class="table-row"><strong>1</strong><div><h4>Лор</h4><p class="muted">Чтобы понять, почему мир Fallout не просто «после взрыва», а отдельная альтернативная цивилизация.</p></div></div>
+            <div class="table-row"><strong>2</strong><div><h4>Хронология</h4><p class="muted">Чтобы увидеть даты основных событий: Великая война, появление НКР, кризисы Братства, Института и др.</p></div></div>
+            <div class="table-row"><strong>3</strong><div><h4>Сюжет игр</h4><p class="muted">Здесь собран подробный пересказ центральных историй, мотивов героев и итогов конфликтов.</p></div></div>
+          </div>
+        </div>
+        <div class="panel reveal" data-parallax>
+          <div class="image-frame">
+            <img src="assets/images/pipboy-map.svg" alt="Карта Pip-Boy" class="clickable-image" data-lightbox="assets/images/pipboy-map.svg" data-caption="Разные регионы серии связаны одной темой: выживанием и борьбой за ресурсы." />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Fallout Archive</strong><br />
+        <small>Большой фанатский портал о мире Fallout: лор, хронология, ключевые фракции, убежища и подробный сюжет игр.</small>
+      </div>
+      <div class="footer-links">
+        <a class="pill small" href="index.html">Главная</a>
+        <a class="pill small" href="story.html">Сюжет игр</a>
+        <a class="pill small" href="gallery.html">Галерея</a>
+        <a class="pill small" href="vaults.html">Убежища</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox">
+    <div class="lightbox-inner">
+      <div class="lightbox-head">
+        <strong>Просмотр изображения</strong>
+        <button class="lightbox-close" type="button">Закрыть</button>
+      </div>
+      <img src="" alt="" />
+      <p class="muted" style="margin-top:12px;"></p>
+    </div>
+  </div>
+</body>
+</html>

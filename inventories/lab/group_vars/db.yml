@@ -1,0 +1,39 @@
+---
+postgresql_version: 14
+postgresql_conf_path: "/etc/postgresql/{{ postgresql_version }}/main/postgresql.conf"
+postgresql_hba_path: "/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf"
+postgresql_unix_socket_dir: "/var/run/postgresql"
+
+db_packages:
+  - postgresql
+  - postgresql-contrib
+  - python3-psycopg2
+  - acl
+
+db_service_name: postgresql
+db_port: 5432
+db_allowed_subnet: "192.168.56.0/24"
+db_listen_addresses: "0.0.0.0"
+
+db_backup_enabled: true
+db_backup_dir: "/var/backups/postgresql"
+db_backup_retention_days: 7
+db_backup_hour: "2"
+db_backup_minute: "0"
+db_backup_script_path: "/usr/local/bin/postgres_backup.sh"
+db_restore_script_path: "/usr/local/bin/postgres_restore_latest.sh"
+db_backup_paths:
+  - "{{ db_backup_dir }}"
+  - /etc/postgresql
+
+db_import_enabled: true
+db_import_name: testdatabase
+db_import_user: testuser
+db_import_password: "testpassword"
+db_import_archive: dvdrental.zip
+db_import_remote_dir: /tmp/db_import
+db_import_extract_dir: /tmp/db_import/extracted
+db_import_marker_table: actor
+
+db_backup_databases:
+  - "{{ db_import_name if (db_import_enabled | bool) else '' }}"

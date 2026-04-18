@@ -1,0 +1,6 @@
+---
+- name: Развернуть веб-приложение и конфигурацию nginx
+  hosts: web
+  become: true
+  roles:
+    - web_deploy

@@ -1,0 +1,6 @@
+---
+- name: Удалить развёртывание веб-приложения
+  hosts: web
+  become: true
+  roles:
+    - web_teardown

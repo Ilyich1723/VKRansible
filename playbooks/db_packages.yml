@@ -1,0 +1,6 @@
+---
+- name: Установить пакеты для сервера базы данных
+  hosts: db
+  become: true
+  roles:
+    - db_packages

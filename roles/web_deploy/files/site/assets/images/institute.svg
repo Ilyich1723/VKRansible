@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+  <rect width="900" height="700" fill="#0e1b24"/>
+  <circle cx="450" cy="350" r="210" fill="#1a3340" opacity="0.65"/>
+  <g fill="none" stroke="#8ceaff" stroke-width="4">
+    <circle cx="450" cy="350" r="180"/>
+    <circle cx="450" cy="350" r="130"/>
+    <circle cx="450" cy="350" r="80"/>
+    <line x1="270" y1="350" x2="630" y2="350"/>
+    <line x1="450" y1="170" x2="450" y2="530"/>
+    <line x1="323" y1="223" x2="577" y2="477"/>
+    <line x1="577" y1="223" x2="323" y2="477"/>
+  </g>
+  <rect x="315" y="250" width="270" height="200" rx="24" fill="#102530" stroke="#8ceaff" stroke-width="4"/>
+  <text x="450" y="120" text-anchor="middle" fill="#d1f8ff" font-size="52" font-family="Arial, sans-serif" font-weight="700">INSTITUTE</text>
+  <text x="450" y="342" text-anchor="middle" fill="#8ceaff" font-size="70" font-family="Arial, sans-serif">M.I.T.</text>
+  <text x="450" y="620" text-anchor="middle" fill="#b4ecf7" font-size="28" font-family="Arial, sans-serif">Синты, телепортация и холодный рационализм</text>
+</svg>

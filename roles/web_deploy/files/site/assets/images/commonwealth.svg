@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700">
+  <rect width="1000" height="700" fill="#111822"/>
+  <rect y="500" width="1000" height="200" fill="#31281f"/>
+  <rect x="120" y="220" width="120" height="280" fill="#45505c"/>
+  <rect x="280" y="160" width="150" height="340" fill="#4b5561"/>
+  <rect x="470" y="250" width="110" height="250" fill="#414b58"/>
+  <rect x="620" y="140" width="150" height="360" fill="#505a65"/>
+  <rect x="810" y="270" width="90" height="230" fill="#434d57"/>
+  <g fill="#8cf7ff">
+    <rect x="150" y="250" width="60" height="12"/>
+    <rect x="310" y="210" width="90" height="12"/>
+    <rect x="650" y="190" width="90" height="12"/>
+  </g>
+  <path d="M70 560 C160 540, 180 610, 260 590 S410 520, 480 550 S650 620, 820 570" fill="none" stroke="#ffb96b" stroke-width="8" stroke-dasharray="18 16"/>
+  <text x="500" y="92" text-anchor="middle" fill="#d4eaff" font-size="52" font-family="Arial, sans-serif" font-weight="700">COMMONWEALTH</text>
+  <text x="500" y="645" text-anchor="middle" fill="#f0d7b4" font-size="28" font-family="Arial, sans-serif">Бостон, Институт и поселения Содружества</text>
+</svg>

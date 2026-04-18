@@ -1,0 +1,10 @@
+---
+- name: Установить neofetch на всех узлах
+  hosts: all
+  become: true
+  tasks:
+    - name: Установить neofetch
+      ansible.builtin.apt:
+        name: neofetch
+        state: present
+        update_cache: true

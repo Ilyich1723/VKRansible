@@ -1,0 +1,188 @@
+---
+- name: Извлечь последний дамп базы данных из репозитория Borg
+  hosts: backup_server
+  gather_facts: false
+  become: true
+  vars:
+    restore_source_host: "{{ groups['db'][0] }}"
+    restore_db_name: "{{ hostvars[groups['db'][0]].db_import_name | default('testdatabase') }}"
+    restore_repo: "{{ backup_repo_base }}/{{ restore_source_host }}"
+    restore_tmp_dir_server: /tmp/borg-restore-test
+    restore_dump_glob: "{{ restore_db_name }}_*.dump"
+    restore_with_globals: false
+
+  tasks:
+    - name: Пересоздать временный каталог восстановления на сервере резервного копирования
+      ansible.builtin.file:
+        path: "{{ restore_tmp_dir_server }}"
+        state: "{{ item }}"
+        owner: "{{ backup_user }}"
+        group: "{{ backup_group }}"
+        mode: "0755"
+      loop:
+        - absent
+        - directory
+
+    - name: Найти последний архив Borg для хоста БД
+      ansible.builtin.shell: |
+        export BORG_PASSPHRASE='{{ backup_borg_passphrase }}'
+        sudo --preserve-env=BORG_PASSPHRASE -u {{ backup_user }} \
+          borg list --last 1 "{{ restore_repo }}" | awk 'NR==1 {print $1}'
+      register: restore_archive_cmd
+      changed_when: false
+      failed_when: restore_archive_cmd.rc != 0 or restore_archive_cmd.stdout | trim == ""
+
+    - name: Сохранить имя последнего архива
+      ansible.builtin.set_fact:
+        restore_archive_name: "{{ restore_archive_cmd.stdout | trim }}"
+
+    - name: Извлечь каталог резервных копий PostgreSQL из последнего архива
+      ansible.builtin.shell: |
+        cd "{{ restore_tmp_dir_server }}"
+        export BORG_PASSPHRASE='{{ backup_borg_passphrase }}'
+        sudo --preserve-env=BORG_PASSPHRASE -u {{ backup_user }} \
+          borg extract "{{ restore_repo }}::{{ restore_archive_name }}" var/backups/postgresql
+      changed_when: true
+
+    - name: Найти последний файл дампа для запрошенной базы данных
+      ansible.builtin.shell: |
+        find "{{ restore_tmp_dir_server }}/var/backups/postgresql" \
+          -maxdepth 1 -type f -name "{{ restore_dump_glob }}" | sort | tail -n 1
+      register: restore_dump_cmd
+      changed_when: false
+      failed_when: restore_dump_cmd.rc != 0 or restore_dump_cmd.stdout | trim == ""
+
+    - name: Сохранить путь к выбранному дампу
+      ansible.builtin.set_fact:
+        restore_dump_path_server: "{{ restore_dump_cmd.stdout | trim }}"
+
+    - name: Найти последний файл globals при включённой опции
+      ansible.builtin.shell: |
+        find "{{ restore_tmp_dir_server }}/var/backups/postgresql" \
+          -maxdepth 1 -type f -name "globals_*.sql" | sort | tail -n 1
+      register: restore_globals_cmd
+      changed_when: false
+      failed_when: false
+      when: restore_with_globals | bool
+
+    - name: Сохранить путь к globals при включённой опции
+      ansible.builtin.set_fact:
+        restore_globals_path_server: "{{ restore_globals_cmd.stdout | trim }}"
+      when: restore_with_globals | bool and (restore_globals_cmd.stdout | trim) != ""
+
+- name: Восстановить базу данных на узле db из извлечённого дампа
+  hosts: db
+  gather_facts: false
+  become: true
+  vars:
+    restore_db_name: "{{ db_import_name | default('testdatabase') }}"
+    restore_db_owner: "{{ db_import_user | default('testuser') }}"
+    restore_marker_table: "{{ db_import_marker_table | default('actor') }}"
+    restore_with_globals: false
+    restore_tmp_dir_db: /tmp/db_restore
+    restore_dump_path_db: "{{ restore_tmp_dir_db }}/{{ restore_db_name }}.dump"
+    restore_globals_path_db: "{{ restore_tmp_dir_db }}/globals.sql"
+    restore_backup_host: "{{ groups['backup_server'][0] }}"
+
+  tasks:
+    - name: Убедиться, что временный каталог восстановления существует на узле db
+      ansible.builtin.file:
+        path: "{{ restore_tmp_dir_db }}"
+        state: directory
+        mode: "0755"
+
+    - name: Скопировать выбранный дамп с сервера резервного копирования на узел db
+      ansible.builtin.fetch:
+        src: "{{ hostvars[restore_backup_host].restore_dump_path_server }}"
+        dest: /tmp/dbrestore-fetch/
+        flat: true
+      delegate_to: "{{ restore_backup_host }}"
+      run_once: true
+
+    - name: Скопировать дамп в итоговый каталог восстановления на узле db
+      ansible.builtin.copy:
+        src: "/tmp/dbrestore-fetch/{{ hostvars[restore_backup_host].restore_dump_path_server | basename }}"
+        dest: "{{ restore_dump_path_db }}"
+        mode: "0644"
+
+    - name: Скопировать файл globals с сервера резервного копирования на узел db при включённой опции
+      ansible.builtin.fetch:
+        src: "{{ hostvars[restore_backup_host].restore_globals_path_server }}"
+        dest: /tmp/dbrestore-fetch/
+        flat: true
+      delegate_to: "{{ restore_backup_host }}"
+      run_once: true
+      when: restore_with_globals | bool and
+            (hostvars[restore_backup_host].restore_globals_path_server is defined)
+
+    - name: Скопировать файл globals в итоговый каталог восстановления на узле db при включённой опции
+      ansible.builtin.copy:
+        src: "/tmp/dbrestore-fetch/{{ hostvars[restore_backup_host].restore_globals_path_server | basename }}"
+        dest: "{{ restore_globals_path_db }}"
+        mode: "0644"
+      when: restore_with_globals | bool and
+            (hostvars[restore_backup_host].restore_globals_path_server is defined)
+
+    - name: Восстановить globals при включённой опции
+      ansible.builtin.shell: |
+        sudo -u postgres psql -f "{{ restore_globals_path_db }}"
+      changed_when: true
+      when: restore_with_globals | bool and
+            (hostvars[restore_backup_host].restore_globals_path_server is defined)
+
+    - name: Завершить активные подключения к целевой базе данных
+      ansible.builtin.shell: |
+        sudo -u postgres psql -d postgres -c "
+        SELECT pg_terminate_backend(pid)
+        FROM pg_stat_activity
+        WHERE datname = '{{ restore_db_name }}'
+          AND pid <> pg_backend_pid();"
+      changed_when: true
+      failed_when: false
+
+    - name: Удалить целевую базу данных, если она существует
+      ansible.builtin.shell: |
+        sudo -u postgres dropdb --if-exists "{{ restore_db_name }}"
+      changed_when: true
+
+    - name: Создать целевую базу данных
+      ansible.builtin.shell: |
+        sudo -u postgres createdb -O "{{ restore_db_owner }}" "{{ restore_db_name }}"
+      changed_when: true
+
+    - name: Восстановить целевую базу данных из дампа
+      ansible.builtin.shell: |
+        sudo -u postgres pg_restore -d "{{ restore_db_name }}" "{{ restore_dump_path_db }}"
+      changed_when: true
+
+    - name: Проверить наличие маркерной таблицы после восстановления
+      ansible.builtin.shell: |
+        sudo -u postgres psql -d "{{ restore_db_name }}" -tAc \
+        "SELECT to_regclass('public.{{ restore_marker_table }}');"
+      register: restore_verify_marker
+      changed_when: false
+      failed_when: restore_verify_marker.stdout | trim == ""
+
+    - name: Удалить временный дамп на узле db
+      ansible.builtin.file:
+        path: "{{ restore_dump_path_db }}"
+        state: absent
+
+    - name: Удалить временный файл globals на узле db при включённой опции
+      ansible.builtin.file:
+        path: "{{ restore_globals_path_db }}"
+        state: absent
+      when: restore_with_globals | bool
+
+- name: Очистить временные файлы восстановления на сервере резервного копирования
+  hosts: backup_server
+  gather_facts: false
+  become: true
+  vars:
+    restore_tmp_dir_server: /tmp/borg-restore-test
+
+  tasks:
+    - name: Удалить временный каталог восстановления на сервере резервного копирования
+      ansible.builtin.file:
+        path: "{{ restore_tmp_dir_server }}"
+        state: absent

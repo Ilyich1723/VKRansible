@@ -1,0 +1,8 @@
+---
+- import_playbook: playbooks/common.yml
+- import_playbook: playbooks/web_packages.yml
+- import_playbook: playbooks/web_deploy.yml
+- import_playbook: playbooks/db_packages.yml
+- import_playbook: playbooks/db_deploy.yml
+- import_playbook: playbooks/db_import.yml
+- import_playbook: playbooks/files.yml

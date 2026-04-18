@@ -1,0 +1,8 @@
+Port 22
+Protocol 2
+PermitRootLogin {{ ssh_permit_root_login }}
+PasswordAuthentication {{ ssh_password_authentication }}
+PubkeyAuthentication {{ ssh_pubkey_authentication }}
+X11Forwarding {{ ssh_x11_forwarding }}
+UsePAM {{ ssh_use_pam }}
+Subsystem sftp /usr/lib/openssh/sftp-server

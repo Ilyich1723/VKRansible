@@ -1,0 +1,74 @@
+---
+- name: Настроить listen_addresses
+  ansible.builtin.lineinfile:
+    path: "{{ postgresql_conf_path }}"
+    regexp: '^[#\s]*listen_addresses\s*='
+    line: "listen_addresses = '{{ db_listen_addresses }}'"
+    backup: true
+  notify: restart postgresql
+
+- name: Настроить порт PostgreSQL
+  ansible.builtin.lineinfile:
+    path: "{{ postgresql_conf_path }}"
+    regexp: '^[#\s]*port\s*='
+    line: "port = {{ db_port }}"
+    backup: true
+  notify: restart postgresql
+
+- name: Применить изменения конфигурации PostgreSQL
+  ansible.builtin.meta: flush_handlers
+
+- name: Дождаться открытия порта PostgreSQL
+  ansible.builtin.wait_for:
+    host: "127.0.0.1"
+    port: "{{ db_port }}"
+    timeout: 30
+
+- name: Проверить доступность PostgreSQL через локальный сокет
+  become_user: postgres
+  community.postgresql.postgresql_ping:
+    login_db: postgres
+    login_unix_socket: "{{ postgresql_unix_socket_dir }}"
+
+- name: Разрешить подключение к PostgreSQL в UFW только из доверенной сети
+  community.general.ufw:
+    rule: allow
+    port: "{{ db_port }}"
+    proto: tcp
+    from_ip: "{{ db_allowed_subnet }}"
+
+- name: Создать каталог для резервных копий PostgreSQL
+  ansible.builtin.file:
+    path: "{{ db_backup_dir }}"
+    state: directory
+    owner: postgres
+    group: postgres
+    mode: "0750"
+  when: db_backup_enabled | bool
+
+- name: Разместить скрипт резервного копирования PostgreSQL
+  ansible.builtin.template:
+    src: db-backup.sh.j2
+    dest: "{{ db_backup_script_path }}"
+    owner: postgres
+    group: postgres
+    mode: "0755"
+  when: db_backup_enabled | bool
+
+- name: Настроить ежедневный backup PostgreSQL через cron
+  ansible.builtin.cron:
+    name: "Daily PostgreSQL backup"
+    user: postgres
+    minute: "{{ db_backup_minute }}"
+    hour: "{{ db_backup_hour }}"
+    job: "{{ db_backup_script_path }}"
+  when: db_backup_enabled | bool
+
+- name: Разместить скрипт восстановления PostgreSQL из последнего backup
+  ansible.builtin.template:
+    src: db-restore-latest.sh.j2
+    dest: "{{ db_restore_script_path }}"
+    owner: postgres
+    group: postgres
+    mode: "0755"
+  when: db_backup_enabled | bool

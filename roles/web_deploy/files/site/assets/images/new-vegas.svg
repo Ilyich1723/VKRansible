@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700">
+  <rect width="1000" height="700" fill="#1a1420"/>
+  <rect y="460" width="1000" height="240" fill="#261f17"/>
+  <circle cx="180" cy="120" r="58" fill="#ffdd75"/>
+  <rect x="90" y="250" width="140" height="210" fill="#403a42"/>
+  <rect x="270" y="190" width="140" height="270" fill="#413a45"/>
+  <rect x="450" y="150" width="120" height="310" fill="#49424b"/>
+  <rect x="620" y="210" width="100" height="250" fill="#433d46"/>
+  <rect x="770" y="170" width="120" height="290" fill="#413845"/>
+  <g fill="#8aff97">
+    <rect x="120" y="278" width="80" height="18"/>
+    <rect x="290" y="220" width="96" height="18"/>
+    <rect x="470" y="183" width="80" height="18"/>
+    <rect x="790" y="205" width="80" height="18"/>
+  </g>
+  <path d="M200 580 C300 520, 430 520, 530 580 S760 620, 900 560" fill="none" stroke="#f2b55b" stroke-width="8" stroke-dasharray="18 14"/>
+  <text x="500" y="100" text-anchor="middle" fill="#ffd48a" font-size="64" font-family="Arial, sans-serif" font-weight="700">NEW VEGAS</text>
+  <text x="500" y="640" text-anchor="middle" fill="#f3d6b5" font-size="28" font-family="Arial, sans-serif">Стрип, неон и борьба за дамбу Гувера</text>
+</svg>

@@ -1,0 +1,27 @@
+---
+- name: Убедиться, что пакет UFW установлен
+  ansible.builtin.apt:
+    name: ufw
+    state: present
+
+- name: Задать политику входящих соединений по умолчанию
+  ansible.builtin.command: ufw default {{ ufw_default_incoming }} incoming
+  register: ufw_default_incoming_cmd
+  changed_when: "'Default incoming policy changed' in ufw_default_incoming_cmd.stdout"
+
+- name: Задать политику исходящих соединений по умолчанию
+  ansible.builtin.command: ufw default {{ ufw_default_outgoing }} outgoing
+  register: ufw_default_outgoing_cmd
+  changed_when: "'Default outgoing policy changed' in ufw_default_outgoing_cmd.stdout"
+
+- name: Разрешить необходимые общие TCP-порты
+  ansible.builtin.command: ufw allow {{ item }}/tcp
+  loop: "{{ ufw_allowed_tcp }}"
+  register: ufw_allow_common
+  changed_when: "'Rule added' in ufw_allow_common.stdout or 'Rules updated' in ufw_allow_common.stdout"
+
+- name: Включить UFW
+  ansible.builtin.command: ufw --force enable
+  register: ufw_enable_cmd
+  changed_when: "'Firewall is active and enabled on system startup' in ufw_enable_cmd.stdout"
+  failed_when: false

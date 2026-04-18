@@ -1,0 +1,20 @@
+---
+- name: Удалить символьную ссылку сайта nginx
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/college.conf
+    state: absent
+
+- name: Удалить конфигурацию сайта nginx
+  ansible.builtin.file:
+    path: /etc/nginx/sites-available/college.conf
+    state: absent
+
+- name: Удалить корневой каталог веб-сайта
+  ansible.builtin.file:
+    path: "{{ web_root }}"
+    state: absent
+
+- name: Перезагрузить nginx после удаления развёртывания
+  ansible.builtin.service:
+    name: nginx
+    state: reloaded

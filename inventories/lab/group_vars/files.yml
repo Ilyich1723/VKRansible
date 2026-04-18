@@ -1,0 +1,18 @@
+---
+samba_packages:
+  - samba
+
+samba_services:
+  - smbd
+  - nmbd
+
+samba_share_name: public
+samba_share_path: /srv/samba/public
+samba_share_comment: Общая папка колледжа
+
+samba_share_owner: nobody
+samba_share_group: nogroup
+samba_share_dir_mode: "0775"
+
+samba_public_read_only: no
+samba_guest_ok: yes

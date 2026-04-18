@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fallout Archive — Хронология</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/app.js"></script>
+</head>
+<body data-page="timeline">
+  <div class="scroll-progress"><span></span></div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html">Fallout Archive</a>
+      <button class="menu-toggle" type="button" aria-label="Открыть меню">☰</button>
+      <nav class="main-nav">
+        <a href="index.html">Главная</a>
+        <a href="lore.html">Лор</a>
+        <a href="timeline.html">Хронология</a>
+        <a href="games.html">Игры</a>
+        <a href="story.html">Сюжет</a>
+        <a href="factions.html">Фракции</a>
+        <a href="vaults.html">Убежища</a>
+        <a href="gallery.html">Галерея</a>
+      </nav>
+      <button class="theme-toggle" type="button">Светлая тема</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Хронология</p>
+          <h1>Ключевые даты мира Fallout</h1>
+          <p class="lead">Здесь собраны главные события от довоенного кризиса до сюжетов основных игр. Можно фильтровать события по эпохам.</p>
+        </div>
+        <div class="filters reveal" data-filter-group="timeline" data-target=".timeline-item">
+          <button class="filter-btn active" data-filter="all">Все</button>
+          <button class="filter-btn" data-filter="prewar">До войны</button>
+          <button class="filter-btn" data-filter="war">Война</button>
+          <button class="filter-btn" data-filter="rebuild">Восстановление</button>
+          <button class="filter-btn" data-filter="games">Сюжеты игр</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container timeline-grid">
+        <article class="timeline-item reveal spotlight" data-category="prewar">
+          <span class="year">XXI век</span>
+          <h3>Ускорение технологической гонки</h3>
+          <p class="lead">Мир всё сильнее зависит от атомной энергетики, робототехники и крупных военно-промышленных корпораций.</p>
+        </article>
+        <article class="timeline-item reveal spotlight" data-category="prewar">
+          <span class="year">ресурсный кризис</span>
+          <h3>Нарастание международной напряжённости</h3>
+          <p class="lead">Глобальная нехватка ресурсов приводит к войнам, контролю над сырьём и жёсткой милитаризации государств.</p>
+        </article>
+        <article class="timeline-item reveal spotlight" data-category="war">
+          <span class="year">23 октября 2077</span>
+          <h3>Великая война</h3>
+          <p class="lead">Ядерный обмен разрушает цивилизацию в считаные часы. Убежища закрываются, а поверхность превращается в заражённую пустошь.</p>
+        </article>
+        <article class="timeline-item reveal spotlight" data-category="rebuild">
+          <span class="year">после 2077</span>
+          <h3>Формирование локальных общин</h3>
+          <p class="lead">Выжившие строят поселения, племена и торговые пути, а довоенные структуры власти окончательно распадаются.</p>
+        </article>
+        <article class="timeline-item reveal spotlight" data-category="rebuild games">
+          <span class="year">2161</span>
+          <h3>Fallout</h3>
+          <p class="lead">Выходец из Убежища 13 ищет водный чип, а затем сталкивается с угрозой армии супермутантов и Повелителя.</p>
+        </article>
+        <article class="timeline-item reveal spotlight" data-category="rebuild">
+          <span class="year">2189 и далее</span>
+          <h3>Рост Новой Калифорнийской Республики</h3>
+          <p class="lead">Шэйди Сэндс превращается в центр новой республиканской модели власти и экспансии.</p>
+        </article>
+        <article class="timeline-item reveal spotlight" data-category="games">
+          <span class="year">2241</span>
+          <h3>Fallout 2</h3>
+          <p class="lead">Избранный ищет ГЭКК ради спасения Арройо и оказывается втянут в борьбу против Анклава.</p>
+        </article>
+        <article class="timeline-item reveal spotlight" data-category="games">
+          <span class="year">2277</span>
+          <h3>Fallout 3</h3>
+          <p class="lead">Житель Убежища 101 выходит в Столичную Пустошь, разыскивает отца и участвует в судьбе проекта «Чистота».</p>
+        </article>
+        <article class="timeline-item reveal spotlight" data-category="games">
+          <span class="year">2281</span>
+          <h3>Fallout: New Vegas</h3>
+          <p class="lead">Курьер после покушения становится одной из ключевых фигур конфликта за Нью-Вегас и дамбу Гувера.</p>
+        </article>
+        <article class="timeline-item reveal spotlight" data-category="games">
+          <span class="year">2287</span>
+          <h3>Fallout 4</h3>
+          <p class="lead">Единственный выживший покидает Убежище 111, ищет сына Шона и решает судьбу Содружества.</p>
+        </article>
+        <article class="timeline-item reveal spotlight" data-category="games">
+          <span class="year">2102 и далее</span>
+          <h3>Fallout 76</h3>
+          <p class="lead">Жители Убежища 76 первыми выходят восстанавливать Аппалачию и позже сталкиваются с возвращением людей и фракций.</p>
+        </article>
+        <article class="timeline-item reveal spotlight" data-category="rebuild">
+          <span class="year">поздняя эпоха пустошей</span>
+          <h3>Постоянная борьба за будущее</h3>
+          <p class="lead">История Fallout не о полном восстановлении мира, а о непрерывной конкуренции моделей общества: силой, знаниями, торговлей или свободой.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Fallout Archive</strong><br />
+        <small>Большой фанатский портал о мире Fallout: лор, хронология, ключевые фракции, убежища и подробный сюжет игр.</small>
+      </div>
+      <div class="footer-links">
+        <a class="pill small" href="index.html">Главная</a>
+        <a class="pill small" href="story.html">Сюжет игр</a>
+        <a class="pill small" href="gallery.html">Галерея</a>
+        <a class="pill small" href="vaults.html">Убежища</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox">
+    <div class="lightbox-inner">
+      <div class="lightbox-head">
+        <strong>Просмотр изображения</strong>
+        <button class="lightbox-close" type="button">Закрыть</button>
+      </div>
+      <img src="" alt="" />
+      <p class="muted" style="margin-top:12px;"></p>
+    </div>
+  </div>
+</body>
+</html>

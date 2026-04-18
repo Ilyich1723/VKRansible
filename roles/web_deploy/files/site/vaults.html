@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fallout Archive — Убежища</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/app.js"></script>
+</head>
+<body data-page="vaults">
+  <div class="scroll-progress"><span></span></div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html">Fallout Archive</a>
+      <button class="menu-toggle" type="button" aria-label="Открыть меню">☰</button>
+      <nav class="main-nav">
+        <a href="index.html">Главная</a>
+        <a href="lore.html">Лор</a>
+        <a href="timeline.html">Хронология</a>
+        <a href="games.html">Игры</a>
+        <a href="story.html">Сюжет</a>
+        <a href="factions.html">Фракции</a>
+        <a href="vaults.html">Убежища</a>
+        <a href="gallery.html">Галерея</a>
+      </nav>
+      <button class="theme-toggle" type="button">Светлая тема</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Убежища</p>
+          <h1>Самые известные убежища и их эксперименты</h1>
+          <p class="lead">Vault-Tec продавала идею спасения, но многие убежища были не спасательными объектами, а тщательно продуманными экспериментами над людьми.</p>
+        </div>
+        <div class="filters reveal" data-filter-group="vaults" data-target=".vault-card">
+          <button class="filter-btn active" data-filter="all">Все</button>
+          <button class="filter-btn" data-filter="control">Контрольные</button>
+          <button class="filter-btn" data-filter="social">Социальные</button>
+          <button class="filter-btn" data-filter="biological">Биологические</button>
+          <button class="filter-btn" data-filter="story">Сюжетные</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container vault-grid">
+        <article class="vault-card reveal spotlight" data-category="story control">
+          <div class="image-frame"><img src="assets/images/water-chip.svg" alt="Убежище 13" class="clickable-image" data-lightbox="assets/images/water-chip.svg" data-caption="Убежище 13 — одно из самых знаковых мест серии." /></div>
+          <h3>Убежище 13</h3>
+          <p class="lead">Стартовая точка первой игры. Поломка водного чипа запускает путешествие Выходца, а само убежище становится символом изоляции и страха перед внешним миром.</p>
+        </article>
+        <article class="vault-card reveal spotlight" data-category="story social">
+          <div class="image-frame"><img src="assets/images/vault-door.svg" alt="Убежище 101" class="clickable-image" data-lightbox="assets/images/vault-door.svg" data-caption="Убежище 101 строится вокруг идеи полной изоляции." /></div>
+          <h3>Убежище 101</h3>
+          <p class="lead">Ключевое убежище Fallout 3. Его идеология строится на принципе «никогда не открываться», что делает общество закрытым и зависимым от власти смотрителя.</p>
+        </article>
+        <article class="vault-card reveal spotlight" data-category="story biological">
+          <div class="image-frame"><img src="assets/images/commonwealth.svg" alt="Убежище 111" class="clickable-image" data-lightbox="assets/images/commonwealth.svg" data-caption="Убежище 111 использовало криогенную заморозку." /></div>
+          <h3>Убежище 111</h3>
+          <p class="lead">Криогенное убежище из Fallout 4. Вместо обычного укрытия его жители стали объектами длительного эксперимента по заморозке.</p>
+        </article>
+        <article class="vault-card reveal spotlight" data-category="story social">
+          <div class="image-frame"><img src="assets/images/new-vegas.svg" alt="Убежище 21" class="clickable-image" data-lightbox="assets/images/new-vegas.svg" data-caption="В Убежище 21 конфликты решались через азартные игры." /></div>
+          <h3>Убежище 21</h3>
+          <p class="lead">Необычное убежище New Vegas, где большинство серьёзных решений принималось через игры и ставки. Хороший пример того, как социальный эксперимент меняет культуру сообщества.</p>
+        </article>
+        <article class="vault-card reveal spotlight" data-category="story control">
+          <div class="image-frame"><img src="assets/images/vault-boy.svg" alt="Убежище 76" class="clickable-image" data-lightbox="assets/images/vault-boy.svg" data-caption="Убежище 76 считалось образцовым убежищем без извращённого эксперимента." /></div>
+          <h3>Убежище 76</h3>
+          <p class="lead">Одно из немногих убежищ, которое задумывалось как рабочая база для будущего восстановления страны. С него начинается Fallout 76.</p>
+        </article>
+        <article class="vault-card reveal spotlight" data-category="social">
+          <div class="image-frame"><img src="assets/images/vault-door.svg" alt="Убежище 11" class="clickable-image" data-lightbox="assets/images/vault-door.svg" data-caption="Убежище 11 — один из самых мрачных социальных экспериментов серии." /></div>
+          <h3>Убежище 11</h3>
+          <p class="lead">Жителей подталкивали ежегодно приносить одного человека в жертву ради выживания остальных. Один из самых сильных комментариев серии о страхе и манипуляции.</p>
+        </article>
+        <article class="vault-card reveal spotlight" data-category="biological">
+          <div class="image-frame"><img src="assets/images/power-armor.svg" alt="Убежище 87" class="clickable-image" data-lightbox="assets/images/power-armor.svg" data-caption="Убежище 87 связано с экспериментами FEV." /></div>
+          <h3>Убежище 87</h3>
+          <p class="lead">Связано с использованием FEV и появлением супермутантов в Столичной Пустоши. Здесь тема научного насилия становится почти прямой фабрикой чудовищ.</p>
+        </article>
+        <article class="vault-card reveal spotlight" data-category="social">
+          <div class="image-frame"><img src="assets/images/hero-wasteland.svg" alt="Убежище 34" class="clickable-image" data-lightbox="assets/images/hero-wasteland.svg" data-caption="Убежище 34 показывает, как избыток оружия становится катастрофой." /></div>
+          <h3>Убежище 34</h3>
+          <p class="lead">Жители получили избыточный доступ к оружию и боеприпасам. Эксперимент предсказуемо привёл к насилию, авариям и разрушению внутреннего порядка.</p>
+        </article>
+        <article class="vault-card reveal spotlight" data-category="social biological">
+          <div class="image-frame"><img src="assets/images/pipboy-map.svg" alt="Убежище 22" class="clickable-image" data-lightbox="assets/images/pipboy-map.svg" data-caption="Убежище 22 связывает науку о растениях с биологической катастрофой." /></div>
+          <h3>Убежище 22</h3>
+          <p class="lead">Эксперимент с агробиологией и спорами привёл к заражению и превращению убежища в опасную биологическую зону. Хороший пример того, как серия соединяет науку и хоррор.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Fallout Archive</strong><br />
+        <small>Большой фанатский портал о мире Fallout: лор, хронология, ключевые фракции, убежища и подробный сюжет игр.</small>
+      </div>
+      <div class="footer-links">
+        <a class="pill small" href="index.html">Главная</a>
+        <a class="pill small" href="story.html">Сюжет игр</a>
+        <a class="pill small" href="gallery.html">Галерея</a>
+        <a class="pill small" href="vaults.html">Убежища</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox">
+    <div class="lightbox-inner">
+      <div class="lightbox-head">
+        <strong>Просмотр изображения</strong>
+        <button class="lightbox-close" type="button">Закрыть</button>
+      </div>
+      <img src="" alt="" />
+      <p class="muted" style="margin-top:12px;"></p>
+    </div>
+  </div>
+</body>
+</html>

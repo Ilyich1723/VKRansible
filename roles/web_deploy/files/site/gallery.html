@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fallout Archive — Галерея</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/app.js"></script>
+</head>
+<body data-page="gallery">
+  <div class="scroll-progress"><span></span></div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html">Fallout Archive</a>
+      <button class="menu-toggle" type="button" aria-label="Открыть меню">☰</button>
+      <nav class="main-nav">
+        <a href="index.html">Главная</a>
+        <a href="lore.html">Лор</a>
+        <a href="timeline.html">Хронология</a>
+        <a href="games.html">Игры</a>
+        <a href="story.html">Сюжет</a>
+        <a href="factions.html">Фракции</a>
+        <a href="vaults.html">Убежища</a>
+        <a href="gallery.html">Галерея</a>
+      </nav>
+      <button class="theme-toggle" type="button">Светлая тема</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Галерея</p>
+          <h1>Иллюстрации, атмосфера и визуальные символы серии</h1>
+          <p class="lead">Эта страница нужна, чтобы сайт ощущался живее: здесь есть сетка изображений, слайдер и просмотр картинок в полном размере.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container slider reveal" data-slider>
+        <div class="slider-head">
+          <div>
+            <p class="eyebrow">Слайдер</p>
+            <h2>Визуальные опоры вселенной</h2>
+          </div>
+          <div class="stack-sm">
+            <button class="slider-btn slider-prev" type="button">←</button>
+            <button class="slider-btn slider-next" type="button">→</button>
+          </div>
+        </div>
+        <div class="slider-window">
+          <div class="slider-track">
+            <div class="slide">
+              <div class="split-grid">
+                <div class="card"><h3>Пустошь</h3><p class="lead">Руины, выжженный горизонт и постоянное ощущение того, что цивилизация рухнула слишком быстро, а следы её рекламы и архитектуры пережили людей.</p></div>
+                <div class="image-frame"><img src="assets/images/hero-wasteland.svg" alt="Пустошь" class="clickable-image" data-lightbox="assets/images/hero-wasteland.svg" data-caption="Визуальный образ пустоши и руин довоенного мира." /></div>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="split-grid">
+                <div class="card"><h3>Нью-Вегас</h3><p class="lead">Контраст между окружающей пустыней и неоновым городом подчёркивает, как власть и роскошь могут выживать даже на фоне полного распада остального региона.</p></div>
+                <div class="image-frame"><img src="assets/images/new-vegas.svg" alt="Нью-Вегас" class="clickable-image" data-lightbox="assets/images/new-vegas.svg" data-caption="Нью-Вегас — остров неона и власти посреди пустоши." /></div>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="split-grid">
+                <div class="card"><h3>Институт</h3><p class="lead">Холодные геометрические формы Института визуально противопоставлены грязной, самодельной поверхности. Это не просто стиль — это целая идеология.</p></div>
+                <div class="image-frame"><img src="assets/images/institute.svg" alt="Институт" class="clickable-image" data-lightbox="assets/images/institute.svg" data-caption="Институт визуализирует технократическое будущее внутри разрушенного мира." /></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container gallery-grid">
+        <article class="gallery-card reveal spotlight">
+          <div class="image-frame"><img src="assets/images/power-armor.svg" alt="Силовая броня" class="clickable-image" data-lightbox="assets/images/power-armor.svg" data-caption="Силовая броня — один из главных визуальных символов всей франшизы." /></div>
+          <h3>Силовая броня</h3>
+        </article>
+        <article class="gallery-card reveal spotlight">
+          <div class="image-frame"><img src="assets/images/vault-door.svg" alt="Дверь убежища" class="clickable-image" data-lightbox="assets/images/vault-door.svg" data-caption="Дверь убежища — символ мнимой безопасности и скрытых экспериментов." /></div>
+          <h3>Vault-Tec</h3>
+        </article>
+        <article class="gallery-card reveal spotlight">
+          <div class="image-frame"><img src="assets/images/mushroom-cloud.svg" alt="Великая война" class="clickable-image" data-lightbox="assets/images/mushroom-cloud.svg" data-caption="Момент, разделивший историю мира на «до» и «после»." /></div>
+          <h3>Великая война</h3>
+        </article>
+        <article class="gallery-card reveal spotlight">
+          <div class="image-frame"><img src="assets/images/ncr.svg" alt="НКР" class="clickable-image" data-lightbox="assets/images/ncr.svg" data-caption="НКР показывает, как в пустоши снова возникает государственность." /></div>
+          <h3>НКР</h3>
+        </article>
+        <article class="gallery-card reveal spotlight">
+          <div class="image-frame"><img src="assets/images/pipboy-map.svg" alt="Pip-Boy" class="clickable-image" data-lightbox="assets/images/pipboy-map.svg" data-caption="Pip-Boy связывает эстетику ретрофутуризма и практичность выживания." /></div>
+          <h3>Pip-Boy</h3>
+        </article>
+        <article class="gallery-card reveal spotlight">
+          <div class="image-frame"><img src="assets/images/commonwealth.svg" alt="Содружество" class="clickable-image" data-lightbox="assets/images/commonwealth.svg" data-caption="Содружество — пример того, как регион становится ареной борьбы технологий и общин." /></div>
+          <h3>Содружество</h3>
+        </article>
+        <article class="gallery-card reveal spotlight">
+          <div class="image-frame"><img src="assets/images/water-chip.svg" alt="Водный чип" class="clickable-image" data-lightbox="assets/images/water-chip.svg" data-caption="Водный чип запускает первый большой сюжет Fallout." /></div>
+          <h3>Водный чип</h3>
+        </article>
+        <article class="gallery-card reveal spotlight">
+          <div class="image-frame"><img src="assets/images/brotherhood.svg" alt="Братство Стали" class="clickable-image" data-lightbox="assets/images/brotherhood.svg" data-caption="Братство — один из самых узнаваемых орденов мира Fallout." /></div>
+          <h3>Братство Стали</h3>
+        </article>
+        <article class="gallery-card reveal spotlight">
+          <div class="image-frame"><img src="assets/images/vault-boy.svg" alt="Vault Boy" class="clickable-image" data-lightbox="assets/images/vault-boy.svg" data-caption="Vault Boy — ироничная улыбка на фоне конца света." /></div>
+          <h3>Vault Boy</h3>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Fallout Archive</strong><br />
+        <small>Большой фанатский портал о мире Fallout: лор, хронология, ключевые фракции, убежища и подробный сюжет игр.</small>
+      </div>
+      <div class="footer-links">
+        <a class="pill small" href="index.html">Главная</a>
+        <a class="pill small" href="story.html">Сюжет игр</a>
+        <a class="pill small" href="gallery.html">Галерея</a>
+        <a class="pill small" href="vaults.html">Убежища</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox">
+    <div class="lightbox-inner">
+      <div class="lightbox-head">
+        <strong>Просмотр изображения</strong>
+        <button class="lightbox-close" type="button">Закрыть</button>
+      </div>
+      <img src="" alt="" />
+      <p class="muted" style="margin-top:12px;"></p>
+    </div>
+  </div>
+</body>
+</html>

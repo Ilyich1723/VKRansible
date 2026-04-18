@@ -1,0 +1,12 @@
+---
+- name: Подготовить сервер резервного копирования
+  hosts: backup_server
+  become: true
+  roles:
+    - backup_server
+
+- name: Подготовить клиенты резервного копирования
+  hosts: backup_clients
+  become: true
+  roles:
+    - backup_client

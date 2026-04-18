@@ -1,0 +1,119 @@
+---
+- block:
+    - name: Убедиться, что unzip установлен
+      ansible.builtin.apt:
+        name: unzip
+        state: present
+        update_cache: true
+
+    - name: Убедиться, что удалённый каталог импорта существует
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+      loop:
+        - "{{ db_import_remote_dir }}"
+        - "{{ db_import_extract_dir }}"
+
+    - name: Скопировать архив базы данных на узел db
+      ansible.builtin.copy:
+        src: "{{ db_import_archive }}"
+        dest: "{{ db_import_remote_dir }}/{{ db_import_archive }}"
+        mode: '0644'
+
+    - name: Распаковать zip-архив базы данных на узле db
+      ansible.builtin.unarchive:
+        src: "{{ db_import_remote_dir }}/{{ db_import_archive }}"
+        dest: "{{ db_import_remote_dir }}"
+        remote_src: true
+
+    - name: Найти распакованный tar-архив на узле db
+      ansible.builtin.shell: |
+        find "{{ db_import_remote_dir }}" -maxdepth 1 -type f -name '*.tar' | sort | head -n 1
+      register: db_import_tar_path
+      changed_when: false
+      failed_when: db_import_tar_path.stdout | trim == ''
+
+    - name: Распаковать tar-архив базы данных на узле db
+      ansible.builtin.unarchive:
+        src: "{{ db_import_tar_path.stdout | trim }}"
+        dest: "{{ db_import_extract_dir }}"
+        remote_src: true
+
+    - name: Убедиться, что пользователь импортируемой базы данных существует
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_user:
+        name: "{{ db_import_user }}"
+        password: "{{ db_import_password }}"
+        login_unix_socket: "{{ postgresql_unix_socket_dir }}"
+        role_attr_flags: LOGIN
+        state: present
+
+    - name: Убедиться, что импортируемая база данных существует
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_db:
+        name: "{{ db_import_name }}"
+        owner: "{{ db_import_user }}"
+        encoding: UTF8
+        template: template0
+        state: present
+        login_unix_socket: "{{ postgresql_unix_socket_dir }}"
+
+    - name: Разрешить пользователю импортируемой БД из доверенной подсети доступ к импортируемой базе данных
+      community.postgresql.postgresql_pg_hba:
+        dest: "{{ postgresql_hba_path }}"
+        contype: host
+        users: "{{ db_import_user }}"
+        databases: "{{ db_import_name }}"
+        source: "{{ db_allowed_subnet }}"
+        method: md5
+        create: false
+      notify: reload postgresql
+
+    - name: Разрешить пользователю импортируемой БД из доверенной подсети доступ к служебной БД postgres
+      community.postgresql.postgresql_pg_hba:
+        dest: "{{ postgresql_hba_path }}"
+        contype: host
+        users: "{{ db_import_user }}"
+        databases: postgres
+        source: "{{ db_allowed_subnet }}"
+        method: md5
+        create: false
+      notify: reload postgresql
+
+    - name: Применить изменения доступа PostgreSQL для импортируемой базы данных
+      ansible.builtin.meta: flush_handlers
+
+    - name: Проверить, импортированы ли уже данные в базу
+      become: true
+      become_user: postgres
+      ansible.builtin.command: >-
+        psql -d {{ db_import_name }} -tAc "SELECT 1 FROM information_schema.tables
+        WHERE table_schema='public' AND table_name='{{ db_import_marker_table }}' LIMIT 1"
+      register: db_import_marker_check
+      changed_when: false
+      failed_when: false
+
+    - name: Восстановить импортируемый архив в PostgreSQL
+      become: true
+      become_user: postgres
+      ansible.builtin.command: >-
+        pg_restore -Fd {{ db_import_extract_dir }}
+        --no-owner
+        --role={{ db_import_user }}
+        -d {{ db_import_name }}
+      when: db_import_marker_check.stdout | trim != '1'
+
+    - name: Выдать привилегии на объекты импортируемой базы данных
+      become: true
+      become_user: postgres
+      ansible.builtin.command: >-
+        psql -d {{ db_import_name }} -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO {{ db_import_user }};
+        GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO {{ db_import_user }};
+        GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO {{ db_import_user }};"
+      when: db_import_marker_check.stdout | trim != '1'
+  when: db_import_enabled | bool

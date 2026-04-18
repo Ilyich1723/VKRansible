@@ -1,0 +1,18 @@
+---
+web_root: /var/www/college
+server_name: _
+web_packages:
+  - nginx
+  - php-fpm
+  - php-cli
+  - php-curl
+  - php-mbstring
+  - php-pgsql
+  - php-xml
+  - php-zip
+  - postgresql-client
+
+web_backup_paths:
+  - "{{ web_root }}"
+  - /etc/nginx
+adminer_url: https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php

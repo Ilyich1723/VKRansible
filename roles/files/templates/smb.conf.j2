@@ -1,0 +1,19 @@
+[global]
+   workgroup = WORKGROUP
+   server string = files1 Samba Server
+   server role = standalone server
+   security = user
+   map to guest = Bad User
+   dns proxy = no
+
+[{{ samba_share_name }}]
+   path = {{ samba_share_path }}
+   browseable = yes
+   read only = {{ samba_public_read_only }}
+   guest ok = {{ samba_guest_ok }}
+   guest only = yes
+   force user = {{ samba_share_owner }}
+   force group = {{ samba_share_group }}
+   create mask = 0664
+   directory mask = 0775
+   comment = {{ samba_share_comment }}

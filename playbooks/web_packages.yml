@@ -1,0 +1,6 @@
+---
+- name: Установить пакеты для веб-сервера
+  hosts: web
+  become: true
+  roles:
+    - web_packages

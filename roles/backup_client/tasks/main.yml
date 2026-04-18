@@ -1,0 +1,63 @@
+---
+- name: Установить необходимые пакеты для клиента резервного копирования
+  ansible.builtin.apt:
+    name:
+      - borgbackup
+      - openssh-client
+    state: present
+    update_cache: true
+
+- name: Убедиться, что каталог SSH пользователя root существует
+  ansible.builtin.file:
+    path: /root/.ssh
+    state: directory
+    owner: root
+    group: root
+    mode: "0700"
+
+- name: Сгенерировать SSH-ключ для доступа к резервным копиям Borg
+  community.crypto.openssh_keypair:
+    path: "{{ backup_ssh_key_path }}"
+    type: ed25519
+    owner: root
+    group: root
+    mode: "0600"
+  register: backup_client_keypair
+
+- name: Прочитать публичный ключ резервного копирования
+  ansible.builtin.slurp:
+    src: "{{ backup_ssh_key_path }}.pub"
+  register: backup_client_pubkey
+
+- name: Авторизовать публичный ключ клиента на сервере резервного копирования
+  ansible.posix.authorized_key:
+    user: "{{ backup_user }}"
+    key: "{{ backup_client_pubkey.content | b64decode }}"
+    state: present
+  delegate_to: "{{ backup_delegate_host }}"
+  become: true
+
+- name: Убедиться, что каталог дампов БД существует, если хост входит в группу db
+  ansible.builtin.file:
+    path: "{{ db_backup_dir }}"
+    state: directory
+    owner: postgres
+    group: postgres
+    mode: "0750"
+  when: inventory_hostname in groups['db']
+
+- name: Развернуть скрипт резервного копирования Borg
+  ansible.builtin.template:
+    src: borg-backup.sh.j2
+    dest: "{{ backup_script_path }}"
+    owner: root
+    group: root
+    mode: "0750"
+
+- name: Настроить задачу резервного копирования Borg по расписанию
+  ansible.builtin.cron:
+    name: "borg backup job"
+    user: root
+    minute: "{{ backup_cron_minute }}"
+    hour: "{{ backup_cron_hour }}"
+    job: "{{ backup_script_path }} >> {{ backup_log_path }} 2>&1"

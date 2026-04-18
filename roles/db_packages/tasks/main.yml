@@ -1,0 +1,16 @@
+---
+- name: Обновить кэш apt для PostgreSQL
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Установить пакеты PostgreSQL
+  ansible.builtin.apt:
+    name: "{{ db_packages }}"
+    state: present
+
+- name: Убедиться, что PostgreSQL запущен и включён
+  ansible.builtin.service:
+    name: "{{ db_service_name }}"
+    state: started
+    enabled: true

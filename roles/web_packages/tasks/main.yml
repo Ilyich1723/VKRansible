@@ -1,0 +1,40 @@
+---
+- name: Установить пакеты веб-сервера и клиента БД для веб-узла
+  ansible.builtin.apt:
+    name: "{{ web_packages }}"
+    state: present
+    update_cache: true
+    lock_timeout: 300
+
+- name: Определить имя службы PHP-FPM по unit-файлам systemd
+  ansible.builtin.shell: |
+    systemctl list-unit-files --type=service --no-legend 'php*-fpm.service' \
+      | awk '{print $1}' \
+      | head -n 1
+  register: php_fpm_unit_detect
+  changed_when: false
+
+- name: Завершить с ошибкой, если служба PHP-FPM не обнаружена
+  ansible.builtin.fail:
+    msg: "PHP-FPM service was not found after package installation."
+  when: php_fpm_unit_detect.stdout | trim == ""
+
+- name: Задать имя службы PHP-FPM
+  ansible.builtin.set_fact:
+    php_fpm_service_name: "{{ php_fpm_unit_detect.stdout | trim }}"
+
+- name: Сформировать путь к сокету PHP-FPM
+  ansible.builtin.set_fact:
+    php_fpm_socket: "/run/php/{{ php_fpm_service_name | regex_replace('\\.service$', '') }}.sock"
+
+- name: Убедиться, что nginx включён и запущен
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
+
+- name: Убедиться, что PHP-FPM включён и запущен
+  ansible.builtin.service:
+    name: "{{ php_fpm_service_name }}"
+    state: started
+    enabled: true

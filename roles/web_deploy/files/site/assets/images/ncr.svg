@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
+  <rect width="900" height="650" fill="#0f1a1b"/>
+  <rect x="120" y="90" width="660" height="420" rx="22" fill="#f0e1c4"/>
+  <rect x="120" y="300" width="660" height="210" rx="0" fill="#295b3a"/>
+  <circle cx="450" cy="300" r="90" fill="#183522"/>
+  <path d="M390 330 C410 250, 495 248, 515 330" fill="none" stroke="#f0e1c4" stroke-width="14"/>
+  <path d="M415 260 L440 210 L465 260" fill="none" stroke="#f0e1c4" stroke-width="10"/>
+  <text x="450" y="155" text-anchor="middle" fill="#183522" font-size="54" font-family="Arial, sans-serif" font-weight="700">NCR</text>
+  <text x="450" y="575" text-anchor="middle" fill="#b5efc2" font-size="28" font-family="Arial, sans-serif">Республика, экспансия и политика пустошей</text>
+</svg>

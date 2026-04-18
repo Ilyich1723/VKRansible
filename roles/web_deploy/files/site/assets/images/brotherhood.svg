@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+  <rect width="900" height="700" fill="#161820"/>
+  <circle cx="450" cy="350" r="220" fill="#252a36"/>
+  <g fill="none" stroke="#a2b0c5" stroke-width="14" stroke-linecap="round">
+    <circle cx="450" cy="350" r="120"/>
+    <line x1="450" y1="180" x2="450" y2="520"/>
+    <line x1="280" y1="350" x2="620" y2="350"/>
+    <line x1="330" y1="230" x2="570" y2="470"/>
+    <line x1="570" y1="230" x2="330" y2="470"/>
+  </g>
+  <path d="M255 540 L355 450 L405 580 Z" fill="#6e7d92"/>
+  <path d="M645 540 L545 450 L495 580 Z" fill="#6e7d92"/>
+  <circle cx="450" cy="350" r="42" fill="#92f1a0"/>
+  <text x="450" y="110" text-anchor="middle" fill="#e9edf4" font-size="46" font-family="Arial, sans-serif" font-weight="700">BROTHERHOOD OF STEEL</text>
+  <text x="450" y="645" text-anchor="middle" fill="#a6efb0" font-size="28" font-family="Arial, sans-serif">Хранители технологий и военной силы</text>
+</svg>

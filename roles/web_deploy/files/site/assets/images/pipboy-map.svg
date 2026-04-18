@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+  <rect width="900" height="700" fill="#0f1417"/>
+  <rect x="80" y="100" width="740" height="500" rx="28" fill="#1a231d" stroke="#73f093" stroke-width="6"/>
+  <path d="M170 470 C240 350, 290 370, 340 310 S470 220, 530 300 S650 410, 720 230" fill="none" stroke="#73f093" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="170" cy="470" r="18" fill="#73f093"/>
+  <circle cx="340" cy="310" r="18" fill="#73f093"/>
+  <circle cx="530" cy="300" r="18" fill="#73f093"/>
+  <circle cx="720" cy="230" r="18" fill="#73f093"/>
+  <rect x="170" y="170" width="140" height="36" rx="14" fill="#73f093" opacity="0.2"/>
+  <rect x="170" y="230" width="220" height="24" rx="12" fill="#73f093" opacity="0.25"/>
+  <rect x="170" y="530" width="180" height="24" rx="12" fill="#73f093" opacity="0.25"/>
+  <text x="450" y="82" text-anchor="middle" fill="#c9ffd5" font-size="46" font-family="Arial, sans-serif" font-weight="700">PIP-BOY MAP</text>
+  <text x="450" y="650" text-anchor="middle" fill="#b7f6c2" font-size="28" font-family="Arial, sans-serif">Маршруты через пустошь, столичную зону и Мохаве</text>
+</svg>

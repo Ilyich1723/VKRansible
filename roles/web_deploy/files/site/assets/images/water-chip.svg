@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
+  <rect width="700" height="700" fill="#141a22"/>
+  <rect x="140" y="110" width="420" height="480" rx="30" fill="#2a3542" stroke="#7ee2ff" stroke-width="6"/>
+  <rect x="190" y="170" width="320" height="170" rx="18" fill="#12212d"/>
+  <path d="M350 210 C390 260, 420 300, 350 350 C280 300, 310 260, 350 210 Z" fill="#6ce1ff"/>
+  <rect x="190" y="380" width="320" height="42" rx="18" fill="#5f7180"/>
+  <rect x="190" y="450" width="210" height="42" rx="18" fill="#5f7180"/>
+  <rect x="190" y="520" width="270" height="42" rx="18" fill="#5f7180"/>
+  <text x="350" y="85" text-anchor="middle" fill="#c8eff8" font-size="44" font-family="Arial, sans-serif" font-weight="700">WATER CHIP</text>
+  <text x="350" y="645" text-anchor="middle" fill="#9cdbeb" font-size="28" font-family="Arial, sans-serif">Поиск чипа запускает сюжет первой части</text>
+</svg>

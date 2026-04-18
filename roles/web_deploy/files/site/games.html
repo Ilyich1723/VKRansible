@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fallout Archive — Игры</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/app.js"></script>
+</head>
+<body data-page="games">
+  <div class="scroll-progress"><span></span></div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html">Fallout Archive</a>
+      <button class="menu-toggle" type="button" aria-label="Открыть меню">☰</button>
+      <nav class="main-nav">
+        <a href="index.html">Главная</a>
+        <a href="lore.html">Лор</a>
+        <a href="timeline.html">Хронология</a>
+        <a href="games.html">Игры</a>
+        <a href="story.html">Сюжет</a>
+        <a href="factions.html">Фракции</a>
+        <a href="vaults.html">Убежища</a>
+        <a href="gallery.html">Галерея</a>
+      </nav>
+      <button class="theme-toggle" type="button">Светлая тема</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Игры серии</p>
+          <h1>Основные части и важные спин-оффы</h1>
+          <p class="lead">На этой странице собраны игры франшизы с кратким описанием, годами выхода, сеттингом и переходом к подробному сюжету.</p>
+        </div>
+        <div class="search-box reveal">
+          <label for="game-search">Поиск по играм</label>
+          <input id="game-search" type="text" placeholder="Например: New Vegas, Анклав, Мохаве, 2287" />
+        </div>
+        <p class="empty-state" id="games-empty" hidden>По этому запросу ничего не найдено.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container cards-3" id="games-grid">
+        <article class="game-card reveal spotlight" data-search="fallout 1 1997 2161 водный чип повелитель супермутанты убежище 13">
+          <div class="image-frame"><img src="assets/images/water-chip.svg" alt="Fallout 1" class="clickable-image" data-lightbox="assets/images/water-chip.svg" data-caption="Fallout 1 начинается с поиска водного чипа для Убежища 13." /></div>
+          <h3>Fallout</h3>
+          <p class="muted">1997 · Южная Калифорния · 2161 год</p>
+          <p class="lead">Первая игра серии: поиски водного чипа быстро перерастают в борьбу с Повелителем и его проектом создания армии супермутантов.</p>
+          <div class="card-tags"><span>Убежище 13</span><span>Повелитель</span><span>Супермутанты</span></div>
+          <a class="story-anchor" href="story.html#fallout1">Читать сюжет</a>
+        </article>
+
+        <article class="game-card reveal spotlight" data-search="fallout 2 1998 2241 гэкк анклав избранный арройо">
+          <div class="image-frame"><img src="assets/images/ncr.svg" alt="Fallout 2" class="clickable-image" data-lightbox="assets/images/ncr.svg" data-caption="Fallout 2 расширяет масштаб мира и показывает рост НКР." /></div>
+          <h3>Fallout 2</h3>
+          <p class="muted">1998 · Западное побережье · 2241 год</p>
+          <p class="lead">История Избранного, который ищет ГЭКК для Арройо, а затем выходит на след Анклава — наследников довоенного правительства.</p>
+          <div class="card-tags"><span>ГЭКК</span><span>Анклав</span><span>Арройо</span></div>
+          <a class="story-anchor" href="story.html#fallout2">Читать сюжет</a>
+        </article>
+
+        <article class="game-card reveal spotlight" data-search="fallout tactics 2001 братство стали midwest тактика отряд">
+          <div class="image-frame"><img src="assets/images/brotherhood.svg" alt="Fallout Tactics" class="clickable-image" data-lightbox="assets/images/brotherhood.svg" data-caption="Tactics делает упор на боевые операции Братства Стали." /></div>
+          <h3>Fallout Tactics</h3>
+          <p class="muted">2001 · Средний Запад</p>
+          <p class="lead">Тактическая ветка серии, сосредоточенная на подразделении Братства Стали и их походе через опасные территории, мутантов и техноугрозы.</p>
+          <div class="card-tags"><span>Отряд</span><span>Братство</span><span>Тактика</span></div>
+          <a class="story-anchor" href="story.html#tactics">Читать сюжет</a>
+        </article>
+
+        <article class="game-card reveal spotlight" data-search="fallout 3 2008 2277 отец проект чистота анклав столица убежище 101">
+          <div class="image-frame"><img src="assets/images/pipboy-map.svg" alt="Fallout 3" class="clickable-image" data-lightbox="assets/images/pipboy-map.svg" data-caption="Fallout 3 переносит серию в Столичную Пустошь." /></div>
+          <h3>Fallout 3</h3>
+          <p class="muted">2008 · Столичная Пустошь · 2277 год</p>
+          <p class="lead">Путь из Убежища 101 к проекту «Чистота», конфликту Братства и Анклава, а также к вопросу: кто получит контроль над водой и будущим региона.</p>
+          <div class="card-tags"><span>Убежище 101</span><span>Проект Чистота</span><span>Анклав</span></div>
+          <a class="story-anchor" href="story.html#fallout3">Читать сюжет</a>
+        </article>
+
+        <article class="game-card reveal spotlight" data-search="new vegas 2010 2281 курьер дамба гувера цезарь mr house yes man мохаве">
+          <div class="image-frame"><img src="assets/images/new-vegas.svg" alt="Fallout New Vegas" class="clickable-image" data-lightbox="assets/images/new-vegas.svg" data-caption="New Vegas — неон, фракции и борьба за дамбу Гувера." /></div>
+          <h3>Fallout: New Vegas</h3>
+          <p class="muted">2010 · Мохаве · 2281 год</p>
+          <p class="lead">Одна из самых вариативных частей: Курьер выживает после выстрела в голову и становится центром борьбы НКР, Легиона, мистера Хауса и независимого Нью-Вегаса.</p>
+          <div class="card-tags"><span>Курьер</span><span>Дамба Гувера</span><span>Фракции</span></div>
+          <a class="story-anchor" href="story.html#newvegas">Читать сюжет</a>
+        </article>
+
+        <article class="game-card reveal spotlight" data-search="fallout 4 2015 2287 сын шон институт синты содружество убежище 111">
+          <div class="image-frame"><img src="assets/images/commonwealth.svg" alt="Fallout 4" class="clickable-image" data-lightbox="assets/images/commonwealth.svg" data-caption="Fallout 4 связывает личную драму героя с конфликтом Института и Содружества." /></div>
+          <h3>Fallout 4</h3>
+          <p class="muted">2015 · Содружество · 2287 год</p>
+          <p class="lead">История Единственного выжившего, который после криосна выходит в Бостон, ищет сына и выбирает судьбу Содружества среди нескольких конкурирующих сил.</p>
+          <div class="card-tags"><span>Шон</span><span>Институт</span><span>Синты</span></div>
+          <a class="story-anchor" href="story.html#fallout4">Читать сюжет</a>
+        </article>
+
+        <article class="game-card reveal spotlight" data-search="fallout 76 2018 2102 аппалачия смотрители скорчд поселенцы братство">
+          <div class="image-frame"><img src="assets/images/vault-boy.svg" alt="Fallout 76" class="clickable-image" data-lightbox="assets/images/vault-boy.svg" data-caption="Fallout 76 стартует как история первых восстановителей после войны." /></div>
+          <h3>Fallout 76</h3>
+          <p class="muted">2018 · Аппалачия · 2102 год</p>
+          <p class="lead">Сетевой Fallout с сюжетом о первых жителях, покидающих одно из «образцовых» убежищ и пытающихся возродить цивилизацию в разрушенном регионе.</p>
+          <div class="card-tags"><span>Убежище 76</span><span>Аппалачия</span><span>Скорчд</span></div>
+          <a class="story-anchor" href="story.html#fallout76">Читать сюжет</a>
+        </article>
+
+        <article class="game-card reveal spotlight" data-search="fallout shelter 2015 мобильная стратегия убежище строительство жители">
+          <div class="image-frame"><img src="assets/images/vault-door.svg" alt="Fallout Shelter" class="clickable-image" data-lightbox="assets/images/vault-door.svg" data-caption="Fallout Shelter — менеджмент убежища во вселенной Fallout." /></div>
+          <h3>Fallout Shelter</h3>
+          <p class="muted">2015 · Мобильный спин-офф</p>
+          <p class="lead">Не столько сюжетная RPG, сколько менеджмент убежища: игрок распределяет жителей, строит комнаты, отражает угрозы и поддерживает баланс ресурсов.</p>
+          <div class="card-tags"><span>Менеджмент</span><span>Убежище</span><span>Спин-офф</span></div>
+          <a class="story-anchor" href="story.html#shelter">Смотреть раздел</a>
+        </article>
+
+        <article class="game-card reveal spotlight" data-search="fallout brotherhood of steel console spinoff 2004">
+          <div class="image-frame"><img src="assets/images/power-armor.svg" alt="Brotherhood of Steel" class="clickable-image" data-lightbox="assets/images/power-armor.svg" data-caption="Brotherhood of Steel — консольный спин-офф с боевым уклоном." /></div>
+          <h3>Fallout: Brotherhood of Steel</h3>
+          <p class="muted">2004 · Консольный спин-офф</p>
+          <p class="lead">Экшен-ответвление серии, менее важное для центрального канона, но всё равно интересное как попытка увести Fallout в более прямолинейный боевой формат.</p>
+          <div class="card-tags"><span>Спин-офф</span><span>Экшен</span><span>Редкая часть</span></div>
+          <a class="story-anchor" href="story.html#bos">Смотреть раздел</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Fallout Archive</strong><br />
+        <small>Большой фанатский портал о мире Fallout: лор, хронология, ключевые фракции, убежища и подробный сюжет игр.</small>
+      </div>
+      <div class="footer-links">
+        <a class="pill small" href="index.html">Главная</a>
+        <a class="pill small" href="story.html">Сюжет игр</a>
+        <a class="pill small" href="gallery.html">Галерея</a>
+        <a class="pill small" href="vaults.html">Убежища</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox">
+    <div class="lightbox-inner">
+      <div class="lightbox-head">
+        <strong>Просмотр изображения</strong>
+        <button class="lightbox-close" type="button">Закрыть</button>
+      </div>
+      <img src="" alt="" />
+      <p class="muted" style="margin-top:12px;"></p>
+    </div>
+  </div>
+</body>
+</html>

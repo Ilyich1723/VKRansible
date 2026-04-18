@@ -1,0 +1,96 @@
+---
+- name: Убедиться, что корневой каталог веб-сайта существует
+  ansible.builtin.file:
+    path: "{{ web_root }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Развернуть файлы демо-сайта
+  ansible.builtin.copy:
+    src: site/
+    dest: "{{ web_root }}/"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Попытаться скачать Adminer с повторами
+  ansible.builtin.get_url:
+    url: "https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php"
+    dest: "{{ web_root }}/adminer.php"
+    mode: '0644'
+    timeout: 30
+    force: true
+  register: adminer_download
+  retries: 3
+  delay: 5
+  until: adminer_download is succeeded
+  ignore_errors: true
+
+- name: Создать локальную заглушку Adminer, если скачивание не удалось
+  ansible.builtin.copy:
+    dest: "{{ web_root }}/adminer.php"
+    mode: '0644'
+    content: |
+      <?php
+      echo "<h1>Adminer временно недоступен</h1>";
+      echo "<p>Не удалось скачать Adminer с GitHub во время деплоя.</p>";
+      echo "<p>Остальная часть веб-сервера развернута корректно.</p>";
+  when: adminer_download is failed
+
+- name: Развернуть страницу с информацией о БД
+  ansible.builtin.template:
+    src: db.html.j2
+    dest: "{{ web_root }}/db.html"
+    mode: '0644'
+
+- name: Определить имя службы PHP-FPM, если сокет не задан
+  ansible.builtin.shell: |
+    systemctl list-unit-files --type=service --no-legend 'php*-fpm.service' \
+      | awk '{print $1}' \
+      | head -n 1
+  register: php_fpm_unit_detect
+  changed_when: false
+  when: php_fpm_socket is not defined
+
+- name: Завершить с ошибкой, если служба PHP-FPM не обнаружена
+  ansible.builtin.fail:
+    msg: "PHP-FPM service was not found on web host."
+  when:
+    - php_fpm_socket is not defined
+    - php_fpm_unit_detect.stdout | trim == ""
+
+- name: Сформировать путь к сокету PHP-FPM, если он не задан
+  ansible.builtin.set_fact:
+    php_fpm_socket: "/run/php/{{ (php_fpm_unit_detect.stdout | trim) | regex_replace('\\.service$', '') }}.sock"
+  when: php_fpm_socket is not defined
+
+- name: Развернуть конфигурацию виртуального хоста nginx
+  ansible.builtin.template:
+    src: nginx_site.conf.j2
+    dest: /etc/nginx/sites-available/college.conf
+    mode: '0644'
+  notify: reload nginx
+
+- name: Включить сайт college
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/college.conf
+    dest: /etc/nginx/sites-enabled/college.conf
+    state: link
+  notify: reload nginx
+
+- name: Удалить сайт nginx по умолчанию, если он существует
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: reload nginx
+
+- name: Разрешить HTTP в UFW
+  community.general.ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+
+- name: Выполнить хэндлеры
+  ansible.builtin.meta: flush_handlers

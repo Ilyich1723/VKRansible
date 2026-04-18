@@ -1,0 +1,6 @@
+---
+- name: Базовая настройка всех узлов
+  hosts: all
+  become: true
+  roles:
+    - common

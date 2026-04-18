@@ -1,0 +1,6 @@
+---
+- name: Импортировать пользовательский дамп базы данных PostgreSQL
+  hosts: db
+  become: true
+  roles:
+    - db_import

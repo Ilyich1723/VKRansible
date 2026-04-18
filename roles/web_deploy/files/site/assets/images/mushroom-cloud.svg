@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1c2028"/>
+      <stop offset="100%" stop-color="#5c3425"/>
+    </linearGradient>
+    <linearGradient id="fire" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#fff0a1"/>
+      <stop offset="55%" stop-color="#ffb556"/>
+      <stop offset="100%" stop-color="#c95b24"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="700" fill="url(#bg)"/>
+  <rect y="560" width="1000" height="140" fill="#2b231d"/>
+  <ellipse cx="500" cy="240" rx="170" ry="120" fill="url(#fire)"/>
+  <ellipse cx="390" cy="270" rx="115" ry="85" fill="url(#fire)" opacity="0.9"/>
+  <ellipse cx="610" cy="270" rx="115" ry="85" fill="url(#fire)" opacity="0.9"/>
+  <rect x="440" y="290" width="120" height="220" rx="50" fill="url(#fire)"/>
+  <ellipse cx="500" cy="525" rx="190" ry="48" fill="#8d4725" opacity="0.7"/>
+  <text x="500" y="105" text-anchor="middle" fill="#ffe2bf" font-size="56" font-family="Arial, sans-serif" font-weight="700">23 OCT 2077</text>
+  <text x="500" y="640" text-anchor="middle" fill="#f8dbbc" font-size="30" font-family="Arial, sans-serif">Великая война изменила мир за считаные часы</text>
+</svg>

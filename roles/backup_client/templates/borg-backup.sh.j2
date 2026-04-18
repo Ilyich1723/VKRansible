@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export BORG_REPO="{{ backup_user }}@{{ backup_runtime_host }}:{{ backup_repo_base }}/{{ inventory_hostname }}"
+export BORG_PASSPHRASE="{{ backup_borg_passphrase }}"
+export BORG_RSH="ssh -i {{ backup_ssh_key_path }} -o StrictHostKeyChecking=accept-new"
+
+{% for key, value in backup_extra_env.items() %}
+export {{ key }}="{{ value }}"
+{% endfor %}
+
+TIMESTAMP="$(date +%Y-%m-%d_%H-%M-%S)"
+BACKUP_TARGETS=()
+
+{% if inventory_hostname in groups['db'] %}
+if [ -x "{{ db_backup_script_path }}" ]; then
+  su - postgres -c '{{ db_backup_script_path }}'
+fi
+{% endif %}
+
+{% if inventory_hostname in groups['web'] %}
+{% for path in web_backup_paths %}
+BACKUP_TARGETS+=("{{ path }}")
+{% endfor %}
+{% endif %}
+
+{% if inventory_hostname in groups['db'] %}
+{% for path in db_backup_paths %}
+BACKUP_TARGETS+=("{{ path }}")
+{% endfor %}
+{% endif %}
+
+if [ -z "${BACKUP_TARGETS[*]-}" ]; then
+  echo "No backup targets configured"
+  exit 1
+fi
+
+borg create   --stats   --compression {{ backup_compression }}   "::{{ backup_archive_prefix }}-${TIMESTAMP}"   "${BACKUP_TARGETS[@]}"
+
+borg prune -v --list   --keep-daily={{ backup_retention_daily }}   --keep-weekly={{ backup_retention_weekly }}   --keep-monthly={{ backup_retention_monthly }}

@@ -1,0 +1,78 @@
+---
+- name: Установить BorgBackup на сервере резервного копирования
+  ansible.builtin.apt:
+    name: borgbackup
+    state: present
+    update_cache: true
+
+- name: Убедиться, что группа резервного копирования существует
+  ansible.builtin.group:
+    name: "{{ backup_group }}"
+    state: present
+
+- name: Убедиться, что пользователь резервного копирования существует
+  ansible.builtin.user:
+    name: "{{ backup_user }}"
+    group: "{{ backup_group }}"
+    home: "/home/{{ backup_user }}"
+    create_home: true
+    shell: /bin/bash
+    state: present
+
+- name: Убедиться, что каталог .ssh пользователя резервного копирования существует
+  ansible.builtin.file:
+    path: "/home/{{ backup_user }}/.ssh"
+    state: directory
+    owner: "{{ backup_user }}"
+    group: "{{ backup_group }}"
+    mode: "0700"
+
+- name: Убедиться, что каталог Ansible remote tmp существует для пользователя резервного копирования
+  ansible.builtin.file:
+    path: "/home/{{ backup_user }}/.ansible/tmp"
+    state: directory
+    owner: "{{ backup_user }}"
+    group: "{{ backup_group }}"
+    mode: "0700"
+
+- name: Убедиться, что базовый каталог репозитория резервных копий существует
+  ansible.builtin.file:
+    path: "{{ backup_repo_base }}"
+    state: directory
+    owner: "{{ backup_user }}"
+    group: "{{ backup_group }}"
+    mode: "0750"
+
+- name: Убедиться, что репозитории резервных копий для каждого хоста существуют
+  ansible.builtin.file:
+    path: "{{ backup_repo_base }}/{{ item }}"
+    state: directory
+    owner: "{{ backup_user }}"
+    group: "{{ backup_group }}"
+    mode: "{{ backup_repo_mode }}"
+  loop: "{{ groups['backup_clients'] | default([]) | unique }}"
+
+- name: Убедиться, что права владения деревом репозитория резервных копий корректны
+  ansible.builtin.file:
+    path: "{{ backup_repo_base }}"
+    state: directory
+    owner: "{{ backup_user }}"
+    group: "{{ backup_group }}"
+    recurse: true
+
+- name: Проверить, инициализирован ли репозиторий Borg
+  ansible.builtin.stat:
+    path: "{{ backup_repo_base }}/{{ item }}/config"
+  loop: "{{ groups['backup_clients'] | default([]) | unique }}"
+  register: backup_repo_status
+
+- name: Инициализировать репозитории Borg
+  ansible.builtin.command:
+    cmd: "borg init --encryption=repokey-blake2 {{ backup_repo_base }}/{{ item.item }}"
+  become: true
+  become_user: "{{ backup_user }}"
+  environment:
+    BORG_PASSPHRASE: "{{ backup_borg_passphrase }}"
+  loop: "{{ backup_repo_status.results }}"
+  when: not item.stat.exists
+  changed_when: true

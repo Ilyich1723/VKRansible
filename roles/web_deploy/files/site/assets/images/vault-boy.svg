@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
+  <rect width="700" height="700" fill="#0f1720"/>
+  <circle cx="350" cy="220" r="120" fill="#f6d58f"/>
+  <path d="M245 185 C270 105, 430 105, 455 185" fill="#f6d58f"/>
+  <path d="M230 190 C240 120, 300 90, 350 96 C410 102, 460 132, 470 190" fill="#f2c44c"/>
+  <circle cx="300" cy="220" r="12" fill="#1b1c1f"/>
+  <circle cx="400" cy="220" r="12" fill="#1b1c1f"/>
+  <path d="M300 285 C330 310, 370 310, 400 285" fill="none" stroke="#1b1c1f" stroke-width="10" stroke-linecap="round"/>
+  <rect x="250" y="360" width="200" height="170" rx="32" fill="#3e6fb9"/>
+  <circle cx="350" cy="432" r="44" fill="#ffd34f"/>
+  <rect x="220" y="380" width="40" height="130" rx="16" fill="#f6d58f"/>
+  <rect x="440" y="380" width="40" height="130" rx="16" fill="#f6d58f"/>
+  <rect x="280" y="530" width="50" height="120" rx="18" fill="#f6d58f"/>
+  <rect x="370" y="530" width="50" height="120" rx="18" fill="#f6d58f"/>
+  <text x="350" y="86" text-anchor="middle" fill="#f4e6b8" font-size="42" font-family="Arial, sans-serif" font-weight="700">VAULT BOY</text>
+</svg>

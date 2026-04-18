@@ -1,0 +1,6 @@
+---
+- name: Настроить PostgreSQL и локальные скрипты резервного копирования
+  hosts: db
+  become: true
+  roles:
+    - db_deploy

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fallout Archive — Фракции</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/app.js"></script>
+</head>
+<body data-page="factions">
+  <div class="scroll-progress"><span></span></div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html">Fallout Archive</a>
+      <button class="menu-toggle" type="button" aria-label="Открыть меню">☰</button>
+      <nav class="main-nav">
+        <a href="index.html">Главная</a>
+        <a href="lore.html">Лор</a>
+        <a href="timeline.html">Хронология</a>
+        <a href="games.html">Игры</a>
+        <a href="story.html">Сюжет</a>
+        <a href="factions.html">Фракции</a>
+        <a href="vaults.html">Убежища</a>
+        <a href="gallery.html">Галерея</a>
+      </nav>
+      <button class="theme-toggle" type="button">Светлая тема</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Фракции</p>
+          <h1>Силы, которые спорят за будущее пустоши</h1>
+          <p class="lead">Почти каждая игра Fallout строится на столкновении разных моделей мира. Ниже можно фильтровать фракции по типу.</p>
+        </div>
+        <div class="filters reveal" data-filter-group="factions" data-target=".faction-card">
+          <button class="filter-btn active" data-filter="all">Все</button>
+          <button class="filter-btn" data-filter="state">Государственные</button>
+          <button class="filter-btn" data-filter="military">Военные</button>
+          <button class="filter-btn" data-filter="science">Технократические</button>
+          <button class="filter-btn" data-filter="civil">Гражданские</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container faction-grid">
+        <article class="faction-card reveal spotlight" data-category="military state">
+          <div class="image-frame"><img src="assets/images/ncr.svg" alt="НКР" class="clickable-image" data-lightbox="assets/images/ncr.svg" data-caption="НКР — крупнейшая попытка вернуть государственность и право." /></div>
+          <h3>Новая Калифорнийская Республика</h3>
+          <p class="lead">НКР строит законы, армию, бюрократию и торговлю, но вместе с этим сталкивается с коррупцией, перегрузкой институтов и империалистическим расширением.</p>
+        </article>
+        <article class="faction-card reveal spotlight" data-category="military science">
+          <div class="image-frame"><img src="assets/images/brotherhood.svg" alt="Братство Стали" class="clickable-image" data-lightbox="assets/images/brotherhood.svg" data-caption="Братство Стали охраняет технологии и силой удерживает баланс." /></div>
+          <h3>Братство Стали</h3>
+          <p class="lead">Орден воинов и техников, стремящийся контролировать опасные технологии. В разных частях серии оно бывает и защитником, и жёсткой закрытой кастой.</p>
+        </article>
+        <article class="faction-card reveal spotlight" data-category="science">
+          <div class="image-frame"><img src="assets/images/institute.svg" alt="Институт" class="clickable-image" data-lightbox="assets/images/institute.svg" data-caption="Институт считает себя рациональным архитектором будущего." /></div>
+          <h3>Институт</h3>
+          <p class="lead">Подземное научное общество Содружества, развивающее синтов, телепортацию и закрытую модель спасения человечества без учёта воли поверхности.</p>
+        </article>
+        <article class="faction-card reveal spotlight" data-category="state military">
+          <div class="image-frame"><img src="assets/images/power-armor.svg" alt="Анклав" class="clickable-image" data-lightbox="assets/images/power-armor.svg" data-caption="Анклав — остатки довоенной элиты США." /></div>
+          <h3>Анклав</h3>
+          <p class="lead">Потомки правительства и военной элиты довоенной Америки. Считают жителей пустоши деградировавшими и опасными, а себя — единственными законными наследниками страны.</p>
+        </article>
+        <article class="faction-card reveal spotlight" data-category="military">
+          <div class="image-frame"><img src="assets/images/new-vegas.svg" alt="Легион Цезаря" class="clickable-image" data-lightbox="assets/images/new-vegas.svg" data-caption="Легион Цезаря — военная диктатура с культом дисциплины." /></div>
+          <h3>Легион Цезаря</h3>
+          <p class="lead">Жестокая армия-империя, построенная на культе силы, рабстве и полном подчинении личности системе. В New Vegas это один из самых опасных вариантов будущего Мохаве.</p>
+        </article>
+        <article class="faction-card reveal spotlight" data-category="civil science">
+          <div class="image-frame"><img src="assets/images/pipboy-map.svg" alt="Последователи Апокалипсиса" class="clickable-image" data-lightbox="assets/images/pipboy-map.svg" data-caption="Последователи Апокалипсиса несут знания и медицину в пустоши." /></div>
+          <h3>Последователи Апокалипсиса</h3>
+          <p class="lead">Учёные, врачи и гуманитарии, которые распространяют знания, лечат людей и пытаются смягчать последствия хаоса без тотального контроля над обществом.</p>
+        </article>
+        <article class="faction-card reveal spotlight" data-category="civil">
+          <div class="image-frame"><img src="assets/images/commonwealth.svg" alt="Минитмены" class="clickable-image" data-lightbox="assets/images/commonwealth.svg" data-caption="Минитмены — низовая самооборона поселений Содружества." /></div>
+          <h3>Минитмены</h3>
+          <p class="lead">Гражданское ополчение, которое строится не на элитизме, а на идее взаимной помощи между поселениями. Символизирует шанс на самоорганизацию снизу.</p>
+        </article>
+        <article class="faction-card reveal spotlight" data-category="civil science">
+          <div class="image-frame"><img src="assets/images/institute.svg" alt="Подземка" class="clickable-image" data-lightbox="assets/images/institute.svg" data-caption="Подземка борется за освобождение синтов." /></div>
+          <h3>Подземка</h3>
+          <p class="lead">Подпольная сеть, помогающая синтам скрываться и жить свободно. Для одних — идеалисты, для других — опасные радикалы, вмешивающиеся в порядок Содружества.</p>
+        </article>
+        <article class="faction-card reveal spotlight" data-category="state military">
+          <div class="image-frame"><img src="assets/images/vault-door.svg" alt="Vault-Tec" class="clickable-image" data-lightbox="assets/images/vault-door.svg" data-caption="Vault-Tec — корпорация, превратившая спасение в эксперимент." /></div>
+          <h3>Vault-Tec</h3>
+          <p class="lead">Довоенная корпорация, ставшая одной из самых мрачных сил во вселенной. Под видом защиты населения она проектировала убежища как площадки для опытов над людьми.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Fallout Archive</strong><br />
+        <small>Большой фанатский портал о мире Fallout: лор, хронология, ключевые фракции, убежища и подробный сюжет игр.</small>
+      </div>
+      <div class="footer-links">
+        <a class="pill small" href="index.html">Главная</a>
+        <a class="pill small" href="story.html">Сюжет игр</a>
+        <a class="pill small" href="gallery.html">Галерея</a>
+        <a class="pill small" href="vaults.html">Убежища</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox">
+    <div class="lightbox-inner">
+      <div class="lightbox-head">
+        <strong>Просмотр изображения</strong>
+        <button class="lightbox-close" type="button">Закрыть</button>
+      </div>
+      <img src="" alt="" />
+      <p class="muted" style="margin-top:12px;"></p>
+    </div>
+  </div>
+</body>
+</html>

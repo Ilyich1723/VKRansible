@@ -1,0 +1,6 @@
+---
+- name: Настроить файловый сервер
+  hosts: files
+  become: true
+  roles:
+    - files
